@@ -17,7 +17,6 @@ To use:
 
 
 Todo:
-* Currently, fields will not be unmarked. Thay will stay red. This will be fixed. Until then, reload IITC to unmark all fields. Or disable the "fields" layer to just show portal and links. Then it works flawlessy. :)
 
 
 Feature requests? Bug reports? Tell me and I will tell ChatGPT. :)
