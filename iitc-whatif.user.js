@@ -53,14 +53,13 @@
                 for (let fieldGuid in window.fields) {
                     let field = window.fields[fieldGuid];
                     if (field.options.data.points.some(p => p.guid === portalGuid)) {
-                        window.plugin.whatIf.originalColors.set(fieldGuid, field.options.fillColor);
-                        console.log("Fields: ",field, fieldGuid, field.options.fillColor);
+                        window.plugin.whatIf.originalColors.set(fieldGuid, field.options.fillColor);/
                         field.setStyle({ fillColor: 'red' });
                         markedFields++;
                     }
                 }
 
-                console.log(`Marked portal ${portalGuid} and its ${markedLinks} links, ${markedFields} fields as red.`);
+                //console.log(`Marked portal ${portalGuid} and its ${markedLinks} links, ${markedFields} fields as red.`);
                 window.plugin.whatIf.updateHiddenList();
             };
 
@@ -91,13 +90,12 @@
                     if (window.plugin.whatIf.originalColors.has(fieldGuid)) {
                         let field = window.fields[fieldGuid];
                         if (field.options.data.points.some(p => p.guid === portalGuid)) {
-                            console.log("original fillColor: ", fieldGuid, window.plugin.whatIf.originalColors.get(fieldGuid));
                             field.setStyle({ fillColor: window.plugin.whatIf.originalColors.get(fieldGuid) });
                         }
                     }
                 }
 
-                console.log(`Restored portal ${portalGuid} and its links/fields to original colors.`);
+                //console.log(`Restored portal ${portalGuid} and its links/fields to original colors.`);
                 window.plugin.whatIf.updateHiddenList();
             };
 
