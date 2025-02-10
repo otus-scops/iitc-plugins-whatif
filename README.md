@@ -15,8 +15,3 @@ To use:
 6) Select more portals if needed, and for each portal "Mark Portal".
 7) To unmark portal, select "Unmark" in the popup in the lower right corner. Or reload IITC.
 
-
-Todo:
-
-
-Feature requests? Bug reports? Tell me and I will tell ChatGPT. :)
