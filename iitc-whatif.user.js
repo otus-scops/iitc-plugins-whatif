@@ -2,7 +2,7 @@
 // @id             iitc-whatif
 // @name           IITC Plugin: What If - Simulate Portal Destruction
 // @category       Layer
-// @version        0.4
+// @version        0.5
 // @namespace      https://secyourity.se
 // @description    Simulates what happens if enemy portals are destroyed by changing their color to red instead of hiding them.
 // @include        https://intel.ingress.com/*
@@ -53,8 +53,9 @@
                 for (let fieldGuid in window.fields) {
                     let field = window.fields[fieldGuid];
                     if (field.options.data.points.some(p => p.guid === portalGuid)) {
-                        window.plugin.whatIf.originalColors.set(fieldGuid, field.options.color);
-                        field.setStyle({ color: 'red', fillColor: 'red' });
+                        window.plugin.whatIf.originalColors.set(fieldGuid, field.options.fillColor);
+                        console.log("Fields: ",field, fieldGuid, field.options.fillColor);
+                        field.setStyle({ fillColor: 'red' });
                         markedFields++;
                     }
                 }
@@ -79,7 +80,9 @@
                 for (let linkGuid in window.links) {
                     if (window.plugin.whatIf.originalColors.has(linkGuid)) {
                         let link = window.links[linkGuid];
-                        link.setStyle({ color: window.plugin.whatIf.originalColors.get(linkGuid) });
+                        if (link.options.data.oGuid === portalGuid || link.options.data.dGuid === portalGuid) {
+                            link.setStyle({ color: window.plugin.whatIf.originalColors.get(linkGuid) });
+                        }
                     }
                 }
 
@@ -87,7 +90,10 @@
                 for (let fieldGuid in window.fields) {
                     if (window.plugin.whatIf.originalColors.has(fieldGuid)) {
                         let field = window.fields[fieldGuid];
-                        field.setStyle({ color: window.plugin.whatIf.originalColors.get(fieldGuid) });
+                        if (field.options.data.points.some(p => p.guid === portalGuid)) {
+                            console.log("original fillColor: ", fieldGuid, window.plugin.whatIf.originalColors.get(fieldGuid));
+                            field.setStyle({ fillColor: window.plugin.whatIf.originalColors.get(fieldGuid) });
+                        }
                     }
                 }
 
