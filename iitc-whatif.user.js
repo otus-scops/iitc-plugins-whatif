@@ -2,7 +2,7 @@
 // @id             iitc-whatif
 // @name           IITC Plugin: What If - Simulate Portal Destruction
 // @category       Layer
-// @version        0.5
+// @version        0.5.1
 // @namespace      https://secyourity.se
 // @description    Simulates what happens if enemy portals are destroyed by changing their color to red instead of hiding them.
 // @include        https://intel.ingress.com/*
