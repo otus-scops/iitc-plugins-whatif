@@ -53,7 +53,7 @@
                 for (let fieldGuid in window.fields) {
                     let field = window.fields[fieldGuid];
                     if (field.options.data.points.some(p => p.guid === portalGuid)) {
-                        window.plugin.whatIf.originalColors.set(fieldGuid, field.options.fillColor);/
+                        window.plugin.whatIf.originalColors.set(fieldGuid, field.options.fillColor);
                         field.setStyle({ fillColor: 'darkgray' });
                         markedFields++;
                     }
