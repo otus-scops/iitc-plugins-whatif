@@ -36,7 +36,7 @@
                 if (window.portals[portalGuid]) {
                     let portal = window.portals[portalGuid];
                     window.plugin.whatIf.originalColors.set(portalGuid, portal.options.color);
-                    portal.setStyle({ color: 'red', fillColor: 'red' });
+                    portal.setStyle({ color: 'darkgray', fillColor: 'darkgray' });
                 }
 
                 // Change links color
@@ -44,7 +44,7 @@
                     let link = window.links[linkGuid];
                     if (link.options.data.oGuid === portalGuid || link.options.data.dGuid === portalGuid) {
                         window.plugin.whatIf.originalColors.set(linkGuid, link.options.color);
-                        link.setStyle({ color: 'red' });
+                        link.setStyle({ color: 'darkgray' });
                         markedLinks++;
                     }
                 }
@@ -54,7 +54,7 @@
                     let field = window.fields[fieldGuid];
                     if (field.options.data.points.some(p => p.guid === portalGuid)) {
                         window.plugin.whatIf.originalColors.set(fieldGuid, field.options.fillColor);/
-                        field.setStyle({ fillColor: 'red' });
+                        field.setStyle({ fillColor: 'darkgray' });
                         markedFields++;
                     }
                 }
