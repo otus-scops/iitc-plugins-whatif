@@ -2,7 +2,7 @@
 // @id             iitc-whatif
 // @name           IITC Plugin: What If - Simulate Portal Destruction
 // @category       Layer
-// @version        0.5.1
+// @version        0.6.0
 // @namespace      https://secyourity.se
 // @description    Simulates what happens if enemy portals are destroyed by changing their color to red instead of hiding them.
 // @include        https://intel.ingress.com/*
@@ -22,6 +22,7 @@
             // Store hidden portals, links, and fields
             window.plugin.whatIf.hiddenPortals = new Set();
             window.plugin.whatIf.originalColors = new Map();
+            const whatIfCrosslinkPrefix = "cross-";
 
             // Function to change the color of a portal, its links, and fields to red
             window.plugin.whatIf.markPortal = function (portalGuid) {
@@ -46,6 +47,13 @@
                         window.plugin.whatIf.originalColors.set(linkGuid, link.options.color);
                         link.setStyle({ color: 'darkgray' });
                         markedLinks++;
+                    }
+                    // check for cross link
+                    if(window.plugin.crossLinks && window.plugin.crossLinks.linkLayerGuids.hasOwnProperty(linkGuid)){
+                        let clink = window.plugin.crossLinks.linkLayerGuids[linkGuid];
+                        window.plugin.whatIf.originalColors.set(whatIfCrosslinkPrefix + linkGuid, clink.options.color);
+                        clink.setStyle({ color: 'darkgray' });
+                        console.log("cross link detected!", clink);
                     }
                 }
 
@@ -82,6 +90,10 @@
                         if (link.options.data.oGuid === portalGuid || link.options.data.dGuid === portalGuid) {
                             link.setStyle({ color: window.plugin.whatIf.originalColors.get(linkGuid) });
                         }
+                    }
+                    if(window.plugin.whatIf.originalColors.has(whatIfCrosslinkPrefix + linkGuid) && window.plugin.crossLinks.linkLayerGuids.hasOwnProperty(linkGuid)){
+                        let clink = window.plugin.crossLinks.linkLayerGuids[linkGuid];
+                        clink.setStyle({ color: window.plugin.whatIf.originalColors.get(whatIfCrosslinkPrefix + linkGuid) });
                     }
                 }
 
