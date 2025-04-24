@@ -46,14 +46,14 @@
                     if (link.options.data.oGuid === portalGuid || link.options.data.dGuid === portalGuid) {
                         window.plugin.whatIf.originalColors.set(linkGuid, link.options.color);
                         link.setStyle({ color: 'darkgray' });
+                        // check for cross link
+                        if(window.plugin.crossLinks && window.plugin.crossLinks.linkLayerGuids.hasOwnProperty(linkGuid)){
+                            let clink = window.plugin.crossLinks.linkLayerGuids[linkGuid];
+                            window.plugin.whatIf.originalColors.set(whatIfCrosslinkPrefix + linkGuid, clink.options.color);
+                            clink.setStyle({ color: 'darkgray' });
+                            console.log("cross link detected!", clink);
+                        }
                         markedLinks++;
-                    }
-                    // check for cross link
-                    if(window.plugin.crossLinks && window.plugin.crossLinks.linkLayerGuids.hasOwnProperty(linkGuid)){
-                        let clink = window.plugin.crossLinks.linkLayerGuids[linkGuid];
-                        window.plugin.whatIf.originalColors.set(whatIfCrosslinkPrefix + linkGuid, clink.options.color);
-                        clink.setStyle({ color: 'darkgray' });
-                        console.log("cross link detected!", clink);
                     }
                 }
 
@@ -89,11 +89,12 @@
                         let link = window.links[linkGuid];
                         if (link.options.data.oGuid === portalGuid || link.options.data.dGuid === portalGuid) {
                             link.setStyle({ color: window.plugin.whatIf.originalColors.get(linkGuid) });
+
+                            if(window.plugin.whatIf.originalColors.has(whatIfCrosslinkPrefix + linkGuid) && window.plugin.crossLinks.linkLayerGuids.hasOwnProperty(linkGuid)){
+                                let clink = window.plugin.crossLinks.linkLayerGuids[linkGuid];
+                                clink.setStyle({ color: window.plugin.whatIf.originalColors.get(whatIfCrosslinkPrefix + linkGuid) });
+                            }
                         }
-                    }
-                    if(window.plugin.whatIf.originalColors.has(whatIfCrosslinkPrefix + linkGuid) && window.plugin.crossLinks.linkLayerGuids.hasOwnProperty(linkGuid)){
-                        let clink = window.plugin.crossLinks.linkLayerGuids[linkGuid];
-                        clink.setStyle({ color: window.plugin.whatIf.originalColors.get(whatIfCrosslinkPrefix + linkGuid) });
                     }
                 }
 
